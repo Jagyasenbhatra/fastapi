@@ -24,4 +24,4 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
         
       - name: Push the Docker Image
-        run: docker push jagyasenbhatra/:latest
+        run: docker push jagyasenbhatra/fastapi:latest
