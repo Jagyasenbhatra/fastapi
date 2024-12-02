@@ -38,9 +38,11 @@ jobs:
         run: pytest
 
       - name: Scan for Vulnerabilities
-        uses: snyk/action@master
+        uses: snyk/actions@v1.3.2
         with:
           args: test
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
   image-and-push:
     runs-on: ubuntu-latest
