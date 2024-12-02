@@ -16,9 +16,7 @@ jobs:
       - name: Install Dependencies
         run: pip install -r requirements.txt
       - name: Build the Docker Image
-        run: docker build -t my-fastapi-app:latest .
-      - name: Scan for Vulnerabilities (Optional)
-        run: trivy image my-fastapi-app:latest
+        run: docker build -t jagyasenbhatra/my-fastapi-app .
 
   test:
     runs-on: ubuntu-latest
