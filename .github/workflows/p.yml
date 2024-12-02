@@ -38,7 +38,9 @@ jobs:
         run: pytest
 
       - name: Scan for Vulnerabilities
-        run: bandit -r .
+        uses: snyk/action@master
+        with:
+          args: test
 
   image-and-push:
     runs-on: ubuntu-latest
