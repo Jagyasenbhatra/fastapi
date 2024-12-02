@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 jobs:
-  build-and-push:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -16,12 +16,31 @@ jobs:
       - name: Install Dependencies
         run: pip install -r requirements.txt
       - name: Build the Docker Image
-        run: docker build -t jagyasenbhatra/fastapi:latest .
-      - name: Log in to Docker Registry
+        run: docker build -t jagyasenbhatra/fastapi:v1 .
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12.6'
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+      - name: Run Tests
+        run: pytest
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v3
+      - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{secrets.DOCKER_USERNAME}}
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}
-        
+          password: ${{secrets.DOCKER_ACCESS_TOKEN}}
       - name: Push the Docker Image
-        run: docker push jagyasenbhatra/fastapi:latest
+        run: docker push jagyasenbhatra/fastapi:v1
