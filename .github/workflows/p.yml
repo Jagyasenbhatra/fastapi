@@ -21,18 +21,21 @@ jobs:
 
   test:
       runs-on: ubuntu-latest
+      needs : build
       steps:
          - name: Run Tests
            run: pytest
   
   image:
     runs-on: ubuntu-latest
+    needs: test
     steps:
       - name: Build the Docker Image
         run: docker build -t jagyasenbhatra/fastapi:v15 .
 
   push:
     runs-on: ubuntu-latest
+    needs: image
     steps:
      - name: Log in to Docker Registry
        uses: docker/login-action@v2
