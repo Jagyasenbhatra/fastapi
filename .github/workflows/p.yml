@@ -16,7 +16,7 @@ jobs:
       - name: Install Dependencies
         run: pip install -r requirements.txt
       - name: Build the Docker Image
-        run: docker build -t jagyasenbhatra/fastapi:v1 .
+        run: docker build -t jagyasenbhatra/fastapi:v5 .
       - name: Log in to Docker Registry
         uses: docker/login-action@v2
         with:
@@ -24,6 +24,6 @@ jobs:
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
         
       - name: Push the Docker Image
-        run: docker push jagyasenbhatra/fastapi:v1
+        run: docker push jagyasenbhatra/fastapi:v5
 
     
