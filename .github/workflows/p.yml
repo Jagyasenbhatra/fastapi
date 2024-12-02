@@ -16,7 +16,11 @@ jobs:
       - name: Install Dependencies
         run: pip install -r requirements.txt
       - name: Build the Docker Image
+<<<<<<< HEAD
         run: docker build  -t jagyasenbhatra/fastapi:v1 .
+=======
+        run: docker build  -t fastapi:v1 .
+>>>>>>> 4b24642730b5f167f7c6c6c2ec83e3d774ce3eb4
 
   test:
     runs-on: ubuntu-latest
