@@ -36,4 +36,8 @@ jobs:
     steps:
         - uses: actions/checkout@v3
         - name: Build the Docker Image
-          run: docker build  -t my-fastapi-app:latest .
+          run: docker build  -t fastapi:latest:v1 .
+        - name: Pull Docker image
+          run : docker pull jagyasenbhatra/fastapi:v1
+        - name: Run Docker image
+          run : docker run -it -p 8000:8000 jagyasenbhatra/fastapi:v1
